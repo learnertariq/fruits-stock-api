@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+const fruitsRouter = require("./routes/fruits");
+
 const app = express();
 if (app.get("env") !== "production") {
   require("dotenv").config();
@@ -31,27 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
-const { Fruit } = require("./models/fruit");
-app.get("/fruits", async (req, res) => {
-  const fruits = await Fruit.find({});
-  res.send(fruits);
-});
-
-app.post("/fruits", async (req, res) => {
-  const bodyCopy = req.body;
-
-  const fruit = new Fruit({
-    name: bodyCopy.name,
-    quantity: bodyCopy.quantity,
-    supplier: bodyCopy.supplier,
-    price: bodyCopy.price,
-    desc: bodyCopy.desc,
-    img: bodyCopy.img,
-  });
-
-  await fruit.save();
-  res.send(fruit);
-});
+app.use("/fruits", fruitsRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`server is listening on port ${port}`));
