@@ -49,4 +49,10 @@ router.patch("/:id", async (req, res) => {
   res.send(fruit);
 });
 
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  const fruit = await Fruit.findByIdAndDelete(mongoose.Types.ObjectId(id));
+  res.send(fruit);
+});
+
 module.exports = router;
