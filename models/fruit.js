@@ -29,13 +29,19 @@ const fruitSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: 0,
-    maxLength: 100,
+    maxLength: 2000,
   },
   img: {
     type: String,
     required: true,
     minLength: 0,
     maxLength: 1000,
+  },
+  email: {
+    type: String,
+    required: false,
+    minLength: 0,
+    maxLength: 100,
   },
 });
 
