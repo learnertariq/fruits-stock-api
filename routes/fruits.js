@@ -1,11 +1,18 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 const { Fruit } = require("../models/fruit");
+const auth = require("../middleweres/auth");
+
 router.get("/", async (req, res) => {
   const queryObj = {};
-  if (req.query.email) queryObj.email = req.query.email;
 
   const fruits = await Fruit.find(queryObj);
+  res.send(fruits);
+});
+
+router.get("/secured", auth, async (req, res) => {
+  const fruits = await Fruit.find({ email: req.user.email });
   res.send(fruits);
 });
 
@@ -15,7 +22,7 @@ router.get("/:id", async (req, res) => {
   res.send(fruit);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const bodyCopy = req.body;
 
   const fruit = new Fruit({
@@ -25,7 +32,7 @@ router.post("/", async (req, res) => {
     price: bodyCopy.price,
     desc: bodyCopy.desc,
     img: bodyCopy.img,
-    email: bodyCopy.email || "",
+    email: req.user.email,
   });
 
   await fruit.save();

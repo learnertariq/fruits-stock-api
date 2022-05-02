@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const rootRouter = require("./routes/root");
 const fruitsRouter = require("./routes/fruits");
+const loginRouter = require("./routes/login");
 
 const app = express();
 if (app.get("env") !== "production") {
@@ -39,6 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 // routes
 app.use("/", rootRouter);
 app.use("/fruits", fruitsRouter);
+app.use("/login", loginRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`server is listening on port ${port}`));
