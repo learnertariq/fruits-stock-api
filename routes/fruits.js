@@ -2,7 +2,10 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const { Fruit } = require("../models/fruit");
 router.get("/", async (req, res) => {
-  const fruits = await Fruit.find({});
+  const queryObj = {};
+  if (req.query.email) queryObj.email = req.query.email;
+
+  const fruits = await Fruit.find(queryObj);
   res.send(fruits);
 });
 
@@ -22,6 +25,7 @@ router.post("/", async (req, res) => {
     price: bodyCopy.price,
     desc: bodyCopy.desc,
     img: bodyCopy.img,
+    email: bodyCopy.email || "",
   });
 
   await fruit.save();
