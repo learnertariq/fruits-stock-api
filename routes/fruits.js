@@ -2,7 +2,7 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const { Fruit } = require("../models/fruit");
-const auth = require("../middleweres/auth");
+const auth = require("../middlewares/auth");
 
 router.get("/", async (req, res) => {
   const queryObj = {};
