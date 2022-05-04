@@ -35,9 +35,9 @@ app.use(function (req, res, next) {
     "Origin, X-Requested-With, x-auth-token, Content-Type, Accept"
   );
   res.header("Access-Control-Expose-Headers", " x-auth-token");
-
   next();
 });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
