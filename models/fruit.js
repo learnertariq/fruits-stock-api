@@ -11,7 +11,7 @@ const fruitSchema = new mongoose.Schema({
     type: Number,
     required: true,
     minLength: 0,
-    maxLength: 10000,
+    maxLength: 1000000,
   },
   supplier: {
     type: String,
@@ -23,13 +23,13 @@ const fruitSchema = new mongoose.Schema({
     type: Number,
     required: true,
     minLength: 0,
-    maxLength: 1000,
+    maxLength: 100000,
   },
   desc: {
     type: String,
     required: true,
     minLength: 0,
-    maxLength: 2000,
+    maxLength: 5000,
   },
   img: {
     type: String,
